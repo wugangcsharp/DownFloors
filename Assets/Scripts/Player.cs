@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-	public static float speed;
+
 	Transform m_transform;
 
 	Animator m_ani;
@@ -51,8 +51,29 @@ public class Player : MonoBehaviour {
 			}
 		}
 		m_transform.Translate(new Vector3(x*Time.deltaTime*5,0,0));
+		 
 	}
 	void FixedUpdate(){
 		m_transform.rigidbody2D.AddForce(new Vector2(0,-400));
 	}
+	void OnCollision2DEnter(Collision2D collision2D)
+	{
+		Debug.Log("碰撞了");
+		//此处未执行
+		UnityEngine.Debug.Log(collision2D.gameObject);
+//		if(collision2D.collider.CompareTag("Obstacle")){
+//			this.collider2D.enabled=false;
+//		}
+	}
+
+	void OnCollision2DExit(Collision2D collision2D)
+	{
+		if(collision2D.collider.CompareTag("Obstacle")){
+			this.collider2D.enabled=true;
+		}
+	}
+
+
+
+	 
 }
